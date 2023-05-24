@@ -5,13 +5,11 @@ import streamlit as st
 import pandas as pd
 from nltk import ngrams
 import pymorphy2
-#import plotly.graph_objs as go
 import plotly.express as px
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
 st.set_page_config(layout="wide", page_title="Main_diag", page_icon="🏠")  # Полнооконное представление приложения
-alt.themes.enable('streamlit')  # Этот параметр сильно меняет цветовую раскладку, но почему-то без неё не запускается
-# интерактив
+alt.themes.enable('streamlit')
 st.write("# Приложение для определения наиболее часто встречающихся пар слов в строке csv файла")
 st.sidebar.success("Меню приложения")
 number = st.number_input('Укажите количество пар слов, которые нужно отобразить:',
@@ -71,17 +69,7 @@ def words_pair():
         # Create heatmap using plotly.express
         fig = px.imshow(df_pivoted, x=df_pivoted.columns, y=df_pivoted.index)
         fig.update_layout(title='Пары слов по частоте встречаемости в строке')
-
-        # Display plot using st.plotly_chart
         st.plotly_chart(fig)
-        #heatmap = go.Heatmap(
-        #    x=df['Unnamed: 1'],
-        #    y=df['Unnamed: 2'],
-        #    z=df['0'],
-        #    colorscale='brwnyl'
-        #)
-        #fig = go.Figure(data=[heatmap])
-        #fig.show()
 
 
 print(words_pair())
