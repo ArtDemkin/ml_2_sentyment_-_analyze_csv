@@ -1,2 +1,5 @@
-def test():
-    assert 2 + 2 == 4
+def test_one():
+    assert type(1) == int
+
+
+print(test_one())
