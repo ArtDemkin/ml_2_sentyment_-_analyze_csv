@@ -6,7 +6,7 @@ st.set_page_config(layout="wide", page_title="2__analyze", page_icon="📊")  # 
 st.write("# Просмотр наиболее положительных и отрицательных строк по тональности в csv файле")
 
 number = st.number_input('Укажите количество строк:',
-                         min_value=1, max_value=100)
+                         min_value=1, max_value=100)  # 100 максимум
 options = ['POSITIVE', 'NEGATIVE']
 selected_option = st.selectbox('Choose an option', options)
 uploaded_file = st.file_uploader("Choose a file")
@@ -30,7 +30,7 @@ def sent_str():
         if sentiment['label'] == selected_option:
             selected_option_rows.append((text, sentiment['score']))
     selected_option_rows = sorted(selected_option_rows, key=lambda x: x[1], reverse=True)
-    top_positive_rows = selected_option_rows[:number]
+    top_positive_rows = selected_option_rows[:number]  # 100 максимум
 
     st.write('Топ', number, selected_option, 'строк')
     for i, row in enumerate(top_positive_rows, 1):

@@ -13,7 +13,7 @@ alt.themes.enable('streamlit')
 st.write("# Приложение для определения наиболее часто встречающихся пар слов в строке csv файла")
 st.sidebar.success("Меню приложения")
 number = st.number_input('Укажите количество пар слов, которые нужно отобразить:',
-                         min_value=0, max_value=101)
+                         min_value=0, max_value=101)  # 100 максимум
 uploaded_file = st.file_uploader("Choose a file")
 if uploaded_file is not None:
     with open("out.txt", "wb") as f:
@@ -34,7 +34,7 @@ morph = pymorphy2.MorphAnalyzer()
 
 def lemmatize_word(word):
     """
-Вспомогательная мультиязыковая(Rus,En) функция для лемматизауии слов файла из 54
+Вспомогательная мультиязыковая(Rus,En) функция для лемматизауии файла из 544 слов
     """
     return morph.parse(word)[0].normal_form
 
@@ -55,7 +55,7 @@ def words_pair():
         d_f = d_f.str.replace(re.compile(r'\s{2,}'), '', regex='True')
         d_f = d_f.apply(lambda x: ' '.join([lemmatize_word(w) for w in x.split()]))
         df_freq = d_f.apply(count_word_pairs).reset_index()
-        n_largest_cols = df_freq.count().nlargest(number)
+        n_largest_cols = df_freq.count().nlargest(number)  # 100 максимум
         n_largest_cols.to_csv('название_файла.csv')
         df = pd.read_csv('название_файла.csv', encoding='utf8', sep=',', engine='python')
         df = df.drop([0])
