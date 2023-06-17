@@ -23,7 +23,7 @@ if uploaded_file is not None:
 
 def count_word_pairs(text):
     """
-    Вспомогательная функция, принимает на вход Series и
+    Вспомогательная функция, принимает на вход Series и возвращает веса Series
     """
     pairs = ngrams(text.split(), 2)
     return pd.Series(pairs).value_counts()
@@ -34,7 +34,7 @@ morph = pymorphy2.MorphAnalyzer()
 
 def lemmatize_word(word):
     """
-Вспомогательная функция для лемматизауии слов
+Вспомогательная мультиязыковая(Rus,En) функция для лемматизауии слов файла из 54
     """
     return morph.parse(word)[0].normal_form
 
