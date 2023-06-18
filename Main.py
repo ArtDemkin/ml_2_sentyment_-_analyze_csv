@@ -63,6 +63,7 @@ def words_pair():
         df = df.drop('Unnamed: 0', axis=1)
         df['Unnamed: 1'] = df['Unnamed: 1'].str.replace('[^\w\s]+', '')
         df['Unnamed: 2'] = df['Unnamed: 2'].str.replace('[^\w\s]+', '')
+        df = df.dropna()
         # Create heatmap using plotly.express
         df_pivoted = df.pivot(index='Unnamed: 1', columns='Unnamed: 2', values='0')
 
